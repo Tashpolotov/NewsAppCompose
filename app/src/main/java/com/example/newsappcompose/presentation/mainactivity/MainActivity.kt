@@ -13,18 +13,26 @@ import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import androidx.lifecycle.lifecycleScope
+import com.example.newsappcompose.data.local.NewsDao
+import com.example.newsappcompose.domain.model.Article
+import com.example.newsappcompose.domain.model.Source
+import com.example.newsappcompose.presentation.common.EmptyScreen
 import com.example.newsappcompose.presentation.navgraph.NavGraph
 import com.example.newsappcompose.ui.theme.NewsAppComposeTheme
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
     private val viewModel by viewModels<MainViewModel>()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+
         installSplashScreen().apply {
             setKeepOnScreenCondition{
                 viewModel.splashCondition
@@ -50,6 +58,7 @@ class MainActivity : ComponentActivity() {
                     val startDestination = viewModel.startDestionation
                     NavGraph(startDestination = startDestination)
 
+/*                    EmptyScreen()*/
                 }
             }
         }

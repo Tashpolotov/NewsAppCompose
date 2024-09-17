@@ -31,7 +31,10 @@ import com.example.newsappcompose.presentation.navgraph.Route
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun HomeScreen(article: LazyPagingItems<Article>, navigate:(String) -> Unit){
+fun HomeScreen(
+    article: LazyPagingItems<Article>,
+    navigateToSearch:() -> Unit,
+    navigateToDetails:(Article)->Unit){
 
     val title by remember {
         derivedStateOf {
@@ -64,7 +67,7 @@ fun HomeScreen(article: LazyPagingItems<Article>, navigate:(String) -> Unit){
             readOnly = true,
             onValueChange = {},
             onClick = {
-                navigate(Route.SearchScreen.route)
+                navigateToSearch()
             },
             onSearch = {}
             ) 
@@ -86,9 +89,9 @@ fun HomeScreen(article: LazyPagingItems<Article>, navigate:(String) -> Unit){
 
         ArticlesList(
             modifier = Modifier.padding(horizontal = MediumPadding1),
-            article = article,
+            articles = article,
             onClick = {
-                navigate(Route.DetailsScreen.route)
+                navigateToDetails(it)
             }
         )
     }

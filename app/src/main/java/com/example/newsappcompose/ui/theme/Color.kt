@@ -1,5 +1,7 @@
 package com.example.newsappcompose.ui.theme
 
+import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 
 val Purple80 = Color(0xFFD0BCFF)
@@ -21,3 +23,9 @@ val LightBlack = Color(0xFF3A3B3C) //Dark Surface
 
 val BlueGray = Color(0xFFA0A3BD)
 val WhiteGray = Color(0xFFB0B3B8)
+
+val cardColor : Any
+    @Composable
+    get() {
+        return if(isSystemInDarkTheme()) Color.Black else Color.White
+    }
