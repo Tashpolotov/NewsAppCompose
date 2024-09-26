@@ -1,5 +1,6 @@
 package com.example.newsappcompose.presentation.home
 
+import android.util.Log
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.basicMarquee
@@ -28,32 +29,46 @@ import com.example.newsappcompose.presentation.Dimens.MediumPadding1
 import com.example.newsappcompose.presentation.common.ArticlesList
 import com.example.newsappcompose.presentation.common.SearchBar
 import com.example.newsappcompose.presentation.navgraph.Route
+import com.example.newsappcompose.presentation.refresh.PullToRefreshLazyColum
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun HomeScreen(
     article: LazyPagingItems<Article>,
     navigateToSearch:() -> Unit,
-    navigateToDetails:(Article)->Unit){
+    navigateToDetails:(Article)->Unit,
+    onRefresh:()->Unit,
+    isLoading:Boolean
+) {
 
     val title by remember {
         derivedStateOf {
-            if(article.itemCount > 10){
+            if (article.itemCount > 10) {
                 article.itemSnapshotList.items
-                    .slice(IntRange(start = 0, endInclusive = 9 ))
-                    .joinToString(separator = " \uD83d\uDFE5") {it.title}
+                    .slice(IntRange(start = 0, endInclusive = 9))
+                    .joinToString(separator = " \uD83d\uDFE5") { it.title }
             } else {
                 ""
             }
         }
     }
-    Column(modifier = Modifier
-        .fillMaxSize()
-        .padding(top = MediumPadding1)
-        .statusBarsPadding()
+    PullToRefreshLazyColum(
+        isLoading = isLoading,
+        onRefresh = {
+            Log.d("HomeScreen1", "Swipe refresh triggered: refreshing news")
+            onRefresh()
+        }
+    ) { modifier ->
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(top = MediumPadding1)
+            .statusBarsPadding()
     ) {
-        Image(painter = painterResource(
-            id = R.drawable.ic_logo),
+        Image(
+            painter = painterResource(
+                id = R.drawable.ic_logo
+            ),
             contentDescription = null,
             modifier = Modifier
                 .width(150.dp)
@@ -70,11 +85,12 @@ fun HomeScreen(
                 navigateToSearch()
             },
             onSearch = {}
-            ) 
-        
+        )
+
         Spacer(
-            modifier = Modifier.height(MediumPadding1))
-        
+            modifier = Modifier.height(MediumPadding1)
+        )
+
         Text(
             text = title,
             modifier = Modifier
@@ -84,8 +100,9 @@ fun HomeScreen(
             fontSize = 12.sp,
             color = colorResource(id = R.color.placeholder)
         )
-        
+
         Spacer(modifier = Modifier.height(MediumPadding1))
+
 
         ArticlesList(
             modifier = Modifier.padding(horizontal = MediumPadding1),
@@ -95,5 +112,6 @@ fun HomeScreen(
             }
         )
     }
+}
 
 }

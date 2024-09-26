@@ -21,6 +21,8 @@ android {
         vectorDrawables {
             useSupportLibrary = true
         }
+
+
     }
 
     buildTypes {
@@ -76,6 +78,9 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 
+    //okkhtp
+    implementation (libs.com.squareup.okhttp3.logging.interceptor)
+    implementation (libs.com.squareup.okhttp3.okhttp)
     //Splash Api
     implementation("androidx.core:core-splashscreen:1.0.1")
 
@@ -115,6 +120,9 @@ dependencies {
     implementation ("androidx.room:room-runtime:$2.5.2")
     kapt ("androidx.room:room-compiler:2.6.1")
     implementation ("androidx.room:room-ktx:2.6.1")
+
+    implementation(libs.accompanist.navigation.animation)
+
 }
 
 kapt {

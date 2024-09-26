@@ -63,7 +63,6 @@ fun NewsBottomNavigation(
                     unselectedTextColor = colorResource(id = R.color.body),
                     indicatorColor = MaterialTheme.colorScheme.background
 
-
                 )
             )
 

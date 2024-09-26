@@ -124,8 +124,11 @@ fun NewsNavigator() {
                             navController = navController,
                             article = it
                         )
-
-                    }
+                    },
+                    onRefresh = {
+                                viewModel.refreshNews()
+                    },
+                    isLoading = false
                 )
             }
             composable(route = Route.SearchScreen.route) {
