@@ -103,4 +103,7 @@ object AppModule {
         newsDataBase: NewsDataBase
     ) : NewsDao = newsDataBase.newsDao
 
+
+
+
 }
