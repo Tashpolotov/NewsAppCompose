@@ -6,6 +6,9 @@ plugins {
     id ("kotlin-parcelize")
 }
 
+
+
+
 android {
     namespace = "com.example.newsappcompose"
     compileSdk = 34
