@@ -59,6 +59,9 @@ class MainActivity : ComponentActivity() {
                     NavGraph(startDestination = startDestination)
 
 /*                    EmptyScreen()*/
+
+                    // coment for mac
+
                 }
             }
         }
